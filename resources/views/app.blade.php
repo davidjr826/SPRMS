@@ -1,49 +1,43 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"  @class(['dark' => ($appearance ?? 'system') == 'dark'])>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @vite('resources/css/app.css')
+  </head>
+  <body>
+    <section class="flex flex-col justify-center items-center gap-y-3 h-screen bg-gradient-to-r from-orange-500 via-yellow-500 to-orange-500">
+        <!-- logo -->
+        <div class="w-52">
+            <img src="../images/Fire logo.png" alt="Zimamoto Logo" class="w-full" />
+        </div>
 
-        {{-- Inline script to detect system dark mode preference and apply it immediately --}}
-        <script>
-            (function() {
-                const appearance = '{{ $appearance ?? "system" }}';
+        <!-- heading -->
+        <h1 class="text-5xl text-white font-semibold">SPRS MANAGEMENT SYSTEM</h1>
+        <h3 class="text-3xl mt-1 font-semibold">STATE PARADE REPORT</h3>
 
-                if (appearance === 'system') {
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        <!-- form -->
+        <form class="mt-2 flex flex-col justify-start items-center w-full gap-y-2" action="" method="GET">
+            <div class="flex flex-col justify-center items-start w-1/3">
+                <span class="font-semibold">Username</span>
+                <input type="text" name="username" placeholder="Enter Username" class="h-10 px-3 w-full outline-none bg-white rounded-lg" />
+            </div>
+            <div  class="flex flex-col justify-center items-start w-1/3">
+                <span class="font-semibold">Password</span>
+                <input type="password" name="password" placeholder="Enter Password" class="h-10 px-3 w-full outline-none bg-white rounded-lg" />
+            </div>
+            <div class="flex w-1/3 mt-2">
+                <a href="{{ route('dashboard') }}" class="flex justify-center items-center btn h-10 text-center outline-none w-full rounded-lg bg-white hover:bg-orange-400 hover:border-2 hover:border-white cursor-pointer font-semibold">
+                    Login
+                </a>
+            </div>
 
-                    if (prefersDark) {
-                        document.documentElement.classList.add('dark');
-                    }
-                }
-            })();
-        </script>
+            <p class="py-2 text-sm">Forget Password? <a href="#" class="text-blue-600">Click here</a></p>
 
-        {{-- Inline style to set the HTML background color based on our theme in app.css --}}
-        <style>
-            html {
-                background-color: oklch(1 0 0);
-            }
-
-            html.dark {
-                background-color: oklch(0.145 0 0);
-            }
-        </style>
-
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
-
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-        @routes
-        @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
-        @inertiaHead
-    </head>
-    <body class="font-sans antialiased">
-        @inertia
-    </body>
+            <div class="fixed bottom-0">
+                <span>&copy; 2025 Jesh la zimamoto na uokoaji Tanzania Bara, Haki zote zimehifadhiwa</span>
+            <div>
+        </form>
+    </section>
+  </body>
 </html>
